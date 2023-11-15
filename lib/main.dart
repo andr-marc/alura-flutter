@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_alura/screens/form_screen.dart';
 import 'package:projeto_alura/screens/initial_screen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const InitialScreen(),
+      home: const FormScreen(),
     );
   }
 }
