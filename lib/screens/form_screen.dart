@@ -12,6 +12,8 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,8 @@ class _FormScreenState extends State<FormScreen> {
         title: const Text('Nova Tarefa'),
         elevation: 6,
       ),
-      body: Center(
+      body: Form(
+        key: _formKey,
         child: SingleChildScrollView(
           child: Container(
             height: 650,
@@ -36,6 +39,12 @@ class _FormScreenState extends State<FormScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    validator: (String? value) {
+                      if (value != null && value.isEmpty) {
+                        return 'Insira o nome da tarefa';
+                      }
+                      return null;
+                    },
                     controller: nameController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -49,6 +58,14 @@ class _FormScreenState extends State<FormScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          int.parse(value) > 5 ||
+                          int.parse(value) < 1) {
+                        return 'Insira uma dificuldade entre 1 e 5';
+                      }
+                      return null;
+                    },
                     keyboardType: TextInputType.number,
                     controller: difficultyController,
                     decoration: const InputDecoration(
@@ -63,6 +80,12 @@ class _FormScreenState extends State<FormScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
+                        return 'Insira um URL de imagem';
+                      }
+                      return null;
+                    },
                     keyboardType: TextInputType.url,
                     onChanged: (text) {
                       setState(() {});
@@ -99,7 +122,11 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      print('form enviado');
+                    }
+                  },
                   child: const Text('Adicionar'),
                 )
               ],
