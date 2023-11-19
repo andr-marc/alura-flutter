@@ -133,6 +133,7 @@ class _FormScreenState extends State<FormScreen> {
                             ),
                           ),
                         );
+                        Navigator.pop(context);
                       }
                     },
                     child: const Text('Adicionar'),
