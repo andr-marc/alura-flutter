@@ -76,7 +76,6 @@ class _InitialScreenState extends State<InitialScreen> {
                   }
                   return const Text('Erro ao carregar tarefas');
               }
-              return const Text('Erro desconhecido');
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -86,7 +85,7 @@ class _InitialScreenState extends State<InitialScreen> {
             MaterialPageRoute(
               builder: (contextNew) => FormScreen(taskContext: context),
             ),
-          );
+          ).then((value) => setState(() => {}));
         },
         child: const Icon(Icons.add),
       ),
