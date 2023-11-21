@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_alura/components/difficulty.dart';
+import 'package:projeto_alura/data/task_dao.dart';
 
 class Task extends StatefulWidget {
   final String name;
@@ -93,6 +94,9 @@ class _TaskState extends State<Task> {
                             setState(() {
                               widget.level++;
                             });
+                          },
+                          onLongPress: () {
+                            TaskDao().delete(widget.name);
                           },
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
